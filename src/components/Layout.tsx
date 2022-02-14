@@ -1,4 +1,4 @@
-import React, {FC} from "react"
+import React, {Children, FC} from "react"
 import Character from "./Character"
 import "./styles/Layout.css"
 
@@ -22,18 +22,10 @@ const characters: Character[] = [
     }
 ]
 
-const Layout:FC = () => {
+const Layout:FC = ({children}) => {
     return (
         <div className="Layout">
-            {
-                characters.map((char, index) => 
-                <Character key = {index}
-                name = {char.name}
-                planet = {char.planet}
-                url = {char.url} 
-                />
-                )
-            }
+            {children}
         </div>
     )
 }
