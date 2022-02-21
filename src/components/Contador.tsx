@@ -8,7 +8,7 @@ type TCharacter = {
 const Contador:FC = () => {
 
     const getChars = async (texto: string) => {
-        const response = await fetch(`https://rickymortyapi.com/characters?name=${texto}`)
+        const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${texto}`)
         const data = await response.json();
         setChars(data.results);
     }
@@ -21,9 +21,9 @@ const Contador:FC = () => {
             <input type = "text" value = {valor} onChange = {
                 (e) => setValor(e.target.value)}
             ></input>
-            <button> onClick={() => {
+            <button onClick={() => {
                 getChars(valor);
-            }}Buscar</button>
+            }}>Buscar</button>
 
             <div>
                {chars.map(char =>
