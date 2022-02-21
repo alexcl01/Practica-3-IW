@@ -1,20 +1,34 @@
-import React, {FC, useState} from "react";
+import React, {FC, useState, useEffect} from "react";
 import Character from "./Character";
 
 type TCharacter = {
     name: string,
+    id: string,
 }
 
 const Contador:FC = () => {
 
     const getChars = async (texto: string) => {
-        const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${texto}`)
-        const data = await response.json();
-        setChars(data.results);
-    }
+        try {
+            const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${texto}`)
+            const data = await response.json();
+            setChars(data.results);
+        }catch(e){
+            console.error(e);
+        }
+    };
 
     const [chars, setChars] = useState<TCharacter[]> ([]);
     const [valor, setValor] = useState<string> ("");
+    
+    useEffect(() => { 
+        const response = fetch(`https://rickandmortyapi.com/api/character`).then(async (response) => {
+        const data = await response.json();
+        setChars(data.results);
+    }
+    );
+}, [])
+
 
     return (
         <div>
@@ -26,13 +40,15 @@ const Contador:FC = () => {
             }}>Buscar</button>
 
             <div>
+                {chars.length === 0 && <div>loading</div>}
                {chars.map(char =>
-                    <Character name = {char.name} />
+                    <Character key = {char.id} name = {char.name} />
                 )}
                 
             </div>
         </div>
     )
 }
+
 
 export default Contador;
