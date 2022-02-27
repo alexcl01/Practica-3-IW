@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import logo from './logo.svg';
 import {Container} from "react-bootstrap";
 
-import 'bootstrap/dist/css/bootstrap.min.css'
 import Navigation from './components/Navigation';
 import { Layout } from './components/Layout';
 import { Jumbo } from './components/Jumbotron';
