@@ -1,11 +1,22 @@
 import React, { FC } from 'react';
-import Componente from './components/Componente';
+import Container from './components/Container';
+import {
+  ApolloClient, InMemoryCache, ApolloProvider
+} from "@apollo/client";
+
+
+const client = new ApolloClient({
+  uri: 'https://rickandmortyapi.com/graphql',
+  cache: new InMemoryCache()
+});
 
 
 const App:FC = () => {
   return (
     <div>
-      <Componente/>
+      <ApolloProvider client={client}>
+        <Container />
+      </ApolloProvider>
     </div>
   );
 }
